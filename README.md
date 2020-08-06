@@ -97,14 +97,6 @@ $ sudo nano /etc/telegraf/telegraf.conf
   database = "mydb"
 ```
 
-
-# restart telegraf service
-
-```
-sudo service telegraf restart
-```
-
-
 # Collector Config
 
 copy telegraf conf file to  /etc/telegraf.d/zimbra_telegraf.conf with inputs for Zimbra Processes, Zimbra Script
@@ -125,6 +117,12 @@ zmlocalconfig -s zimbra_ldap_password ldap_master_url
    bind_dn = "uid=zimbra,cn=admins,cn=zimbra"
    bind_password = "YOURZIMBRALDAPPASSWORD"
    reverse_metric_names = true
+```
+
+# restart telegraf service
+
+```
+sudo service telegraf restart
 ```
 
 # Upload Zimbra Dashbaord to Grafana
