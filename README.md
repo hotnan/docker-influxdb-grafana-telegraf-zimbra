@@ -98,9 +98,16 @@ $ sudo nano /etc/telegraf/telegraf.conf
 ```
 
 
+# restart telegraf service
+
+```
+sudo service telegraf restart
+```
+
+
 # Collector Config
 
-copy telegraf to  /etc/telegraf.d/zimbra_telegraf.conf with inputs for Zimbra Processes, Zimbra Script
+copy telegraf conf file to  /etc/telegraf.d/zimbra_telegraf.conf with inputs for Zimbra Processes, Zimbra Script
 
 # run this command with zimbra user 
 
@@ -121,3 +128,7 @@ zmlocalconfig -s zimbra_ldap_password ldap_master_url
 ```
 
 # Upload Zimbra Dashbaord to Grafana
+
+```
+grafana-zimbra-collaboration-dashboard.json
+```
