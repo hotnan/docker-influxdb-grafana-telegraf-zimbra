@@ -1,7 +1,22 @@
-# Docker-compose files for a simple uptodate
-# InfluxDB
-# + Grafana stack
-# + Telegraf
+How to monitor a Zimbra Collaboration Environment using Telegraf, InfluxDB and Grafana
+===================
+
+Zimbra Collaboration Performance
+* ZCS Version (Only 8.7 and above)
+* Received Megabytes
+* Total Emails/received
+* Deferred
+* Held
+* Incoming
+* Maildrop
+
+Linux and machine performance:
+* CPUs (defaults to all)
+* Disks (per-disk IOPS)
+* Network interfaces (packets, bandwidth, errors/drops)
+* Mountpoints (space / inodes)
+
+
 
 Get the stack (only once):
 
@@ -44,8 +59,11 @@ docker pull influxdb
 docker pull telegraf
 ```
 
-If you want to run Telegraf, edit the telegraf.conf to yours needs and:
+### giving permission to telegraf process
 
 ```
-docker exec telegraf telegraf
+sudo chgrp -R telegraf /opt/zimbra/data/postfix/spool/{active,hold,incoming,deferred,maildrop}
+sudo chmod -R g+rXs /opt/zimbra/data/postfix/spool/{active,hold,incoming,deferred,maildrop}
+sudo usermod -a -G postdrop telegraf
+sudo chmod g+r /opt/zimbra/data/postfix/spool/maildrop
 ```
