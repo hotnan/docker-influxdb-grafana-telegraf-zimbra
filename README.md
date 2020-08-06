@@ -67,3 +67,57 @@ sudo chmod -R g+rXs /opt/zimbra/data/postfix/spool/{active,hold,incoming,deferre
 sudo usermod -a -G postdrop telegraf
 sudo chmod g+r /opt/zimbra/data/postfix/spool/maildrop
 ```
+
+
+# copy file to zimbra server and run command
+
+```
+/opt/zimbra/common/bin/checkzimbraversion.sh
+chmod +x /opt/zimbra/common/bin/checkzimbraversion.sh
+```
+
+
+# Install Telegarf on Zimbra Server
+
+```
+$ sudo apt-get update && sudo apt-get install telegraf
+```
+
+# Configuring Telegraf
+
+Once installed, you will need to make some changes to the default configuration file that Telegraf ships with. To do this we can edit the telegraf.conf file.
+
+```
+$ sudo nano /etc/telegraf/telegraf.conf
+```
+
+```
+[[outputs.influxdb]]
+  urls = ["http://10.0.0.56:8086"]
+  database = "mydb"
+```
+
+
+# Collector Config
+
+copy telegraf to  /etc/telegraf.d/zimbra_telegraf.conf with inputs for Zimbra Processes, Zimbra Script
+
+# run this command with zimbra user 
+
+```
+zmlocalconfig -s zimbra_ldap_password ldap_master_url
+```
+
+# Change data on section
+
+```
+[[inputs.openldap]]
+   host = "YOURZIMBRASERVERHOSTNAME"
+   port = 389
+   insecure_skip_verify = true
+   bind_dn = "uid=zimbra,cn=admins,cn=zimbra"
+   bind_password = "YOURZIMBRALDAPPASSWORD"
+   reverse_metric_names = true
+```
+
+# Upload Zimbra Dashbaord to Grafana
