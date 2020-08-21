@@ -62,7 +62,6 @@ docker pull telegraf
 ### giving permission to telegraf process
 
 ```
-sudo chgrp -R telegraf /opt/zimbra/data/postfix/spool/{active,hold,incoming,deferred,maildrop}
 sudo chmod -R g+rXs /opt/zimbra/data/postfix/spool/{active,hold,incoming,deferred,maildrop}
 sudo usermod -a -G postdrop telegraf
 sudo chmod g+r /opt/zimbra/data/postfix/spool/maildrop
